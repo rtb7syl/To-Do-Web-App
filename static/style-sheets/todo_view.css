@@ -1,0 +1,45 @@
+h1{
+    text-align: center;
+    
+    padding-bottom: 20px ;
+    font-size:240%;
+}
+.date{
+    color: blue;
+}
+.d{
+    font-size:120%;
+    padding-bottom: 70px ;
+}
+
+h2{
+    color: brown !important;
+}
+
+.b{
+    text-align: center;
+}
+
+
+.desc{
+    text-decoration:line-through;
+}
+
+.a {
+    position:absolute;
+    left: 1000px;
+    bottom: 350px;
+    
+    
+}
+
+.ar {
+    position:absolute;
+    right: 150px;
+     bottom: 350px;
+    
+}
+
+.x{
+    color:green;
+}

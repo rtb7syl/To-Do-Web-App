@@ -1,0 +1,168 @@
+<% include partials/header %>
+
+<link rel="stylesheet" type="text/css" href="style-sheets/todo_view.css">
+
+<div class="ui center aligned container">
+  <h1>To-Do's of  <strong class = "date"><%= date  %> :</strong>  </h1>
+</div>
+
+
+<div class = "div1">
+
+<p class="d">Time now <strong class = "time"></strong></p>
+</div>
+
+
+
+      
+
+<% if(ToDo != null){ for(var i = 0;i < ToDo.todos.length; i++){ %>
+    <% toDoArray = ToDo.todos %>
+        <div class="ui three column centered grid">
+          <div class="column"><div class="ui center aligned teal segment">
+        
+            <div class="ui list">
+              <div class="item">
+                
+                <div class="content">
+                  <% if(toDoArray[i].done){%>
+                  <h2 class="header todo_description<%= i %> desc"><%= toDoArray[i].title %></h2>
+
+                  <div class="description"><p><strong><%= toDoArray[i].description %></strong></p></div>
+                  
+                  <% } else {%>
+                  <h2 class="header todo_description<%= i %>" ><%= toDoArray[i].title %></h2>
+
+                  <div class="description"><p><strong><%= toDoArray[i].description %></strong></p></div>
+                  
+                  <% } %>
+                  
+                </div>
+              </div>
+            </div>
+         </div>
+      
+        
+        
+      </div>
+      
+          <div class="two wide column"><div class="ui center aligned teal segment">
+        
+            <div class="ui list">
+              <div class="item">
+                
+                <div class="content">
+                  <label><strong>Finish within:</strong></label>
+                  <h2 class="header"><%= toDoArray[i].time %></h2>
+                  
+                  
+                </div>
+              </div>
+            </div>
+         </div>
+      
+        
+        
+      </div>
+    </div>
+      <div class="ui two column centered grid">
+      <div class="column">  
+       <% if(toDoArray[i].done){%> 
+        <input id="chck" type="checkbox"  class = "checkbox<%= i %>" name="example" value="1" checked>
+        <label>Mark To-Do Complete</label>
+        
+        <% } else {%>
+
+         <input id="chck" type="checkbox"  class = "checkbox<%= i %>" name="example" value="1">
+         <label>Mark To-Do Complete</label>       
+        
+        <% } %>
+        
+      </div>
+    </div>  
+    <div class="ui two column centered grid">
+      <div class="column">
+        <div class="ui vertical buttons">
+
+          <button onclick="location.href='/<%= date %>/edit/post/<%=toDoArray[i]._id%>'" class="ui button">Edit</button>
+          
+          <form action = "/<%= date %>/post/<%=toDoArray[i]._id%>/<%= i %>?_method=DELETE" method ="POST" class="ui form">
+            <button class="ui button">Delete</button>
+          </form>
+          <!--<button class="ui button">Mark as Done</button>-->
+          <button class="ui button">Shift to another day</button>
+          
+        </div>       
+      </div>
+        
+    </div>
+    
+
+        
+    <% } %>
+       
+<% } else{ %>
+
+
+
+
+  <h2 class = 'b'>Currently there seems to be no To-Do . Add one maybe !!</h2>
+
+<% } %> 
+     
+
+<div class="ui three column centered grid">
+  <div class="column"><div class="ui center aligned teal segment">
+      
+      <h2>Add ToDo</h2>
+      <form action = "/<%= date %>/post" method ="POST" class="ui form">
+       <div class="field">
+        <label>Title</label>
+        <input type="text" name="title" placeholder="Title">
+      </div>
+      <div class="field">
+        <label>Description</label>
+        <input type="text" name="description" placeholder="Description">
+      </div>
+      <div class="field">
+        <label>Finish within:</label>
+        <input type="text" name="time" placeholder="Time to finish within">
+      </div>
+      <button class="ui button" type="submit">Submit</button>
+    </form>
+      
+ </div>
+
+
+
+</div>
+</div>      
+
+
+<div class="ui animated button a" tabindex="0" onclick="goToNextDate()">
+  <div class="visible content">View ToDos for Tomorrow!!</div>
+  <div class="hidden content">
+    <i class="right arrow icon x" ></i>
+  </div>
+</div>
+
+<% if(date.toString() != start_date.toString()){ %>
+<div class="ui animated button ar" tabindex="0" onclick="goToPrevDate()">
+  <div class="visible content">View ToDos for Yesterday!!</div>
+  <div class="hidden content">
+    <i class="left arrow icon x"  ></i>
+  </div>
+</div>
+
+<% } %>
+
+
+
+
+<script type="text/javascript">
+    var date = <%- JSON.stringify(date) %>
+</script>
+
+
+<script type="text/javascript" src = "scripts/todo_view.js"></script>
+<% include partials/footer %>
